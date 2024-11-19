@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #d32f2f;
+      /* Màu đỏ Noel */
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: #ffffff;
+      /* Chữ màu trắng cho dễ đọc */
+      display: none;
+      animation: pop-in 1s ease-out;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      margin: 0;
+      color: #ffffff;
+      /* Chữ màu trắng */
+      text-shadow: 3px 3px 5px #d32f2f, 0 0 25px #ff0000, 0 0 5px #ff0000;
+    }
+
+    .countdown {
+      font-size: 2em;
+      color: #fff;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .balloons {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      display: none;
+    }
+
+    .balloon {
+      position: absolute;
+      width: 60px;
+      height: 80px;
+      background-color: #ffeb3b;
+      /* Màu vàng Noel */
+      border-radius: 50% 50% 45% 45%;
+      transform-origin: bottom center;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background-color: #bdbdbd;
+      transform: translateX(-50%);
+    }
+
+    .balloon:nth-child(odd) {
+      background-color: #ffd740;
+      /* Màu vàng Noel */
+    }
+
+    .balloon:nth-child(even) {
+      background-color: #64b5f6;
+      /* Màu xanh dương Noel */
+    }
+
+    .balloon:nth-child(1) {
+      left: 20%;
+      animation-delay: 0s;
+    }
+
+    .balloon:nth-child(2) {
+      left: 40%;
+      animation-delay: 1s;
+    }
+
+    .balloon:nth-child(3) {
+      left: 60%;
+      animation-delay: 2s;
+    }
+
+    .balloon:nth-child(4) {
+      left: 80%;
+      animation-delay: 3s;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -100px;
+        transform: translateX(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateX(-20px) rotate(-10deg);
+      }
+
+      100% {
+        bottom: 110vh;
+        transform: translateX(20px) rotate(10deg);
+      }
+    }
+
+    @keyframes pop-in {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* CSS cho ảnh khung viền */
+    .photo-frame {
+      margin-top: 20px;
+      border: 5px solid #ffffff;
+      /* Khung viền trắng */
+      padding: 10px;
+      display: inline-block;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+      background-color: #ffeb3b;
+      /* Màu nền vàng */
+    }
+
+    .photo-frame img {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="countdown"><span id="timer">1</span> giây</div>
+  <div class="balloons">
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+  </div>
+  <div class="container" id="birthdayMessage">
+    <h1>🎄 Chúc Mừng Sinh Nhật, <span id="name"></span>! 🎄</h1>
+    <p>Mong Thổ có một ngày nhà giáo Việt Nam đang nhớ hehe</p>
+
+    <!-- Phần thêm ảnh với khung viền -->
+    <div class="photo-frame">
+      <img src="matlon.jpeg" alt="mat lon">
+    </div>
+  </div>
+
+  <script>
+    const personName = "Linh Thổ";
+    document.getElementById("name").innerText = personName;
+
+    let timeLeft = 1;
+    const timerElement = document.getElementById("timer");
+
+    const countdownInterval = setInterval(() => {
+      timeLeft--;
+      timerElement.innerText = timeLeft;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        document.getElementById("birthdayMessage").style.display = "block";
+        document.querySelector(".balloons").style.display = "block";
+        document.querySelector(".countdown").style.display = "none";
+      }
+    }, 1000);
+  </script>
+</body>
+
+</html>
